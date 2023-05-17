@@ -2,7 +2,9 @@ import React from 'react'
 
 const Landing = () => {
   return (
-    <div>Landing</div>
+    <section>
+        <h1>Landing</h1>
+    </section>
   )
 }
 

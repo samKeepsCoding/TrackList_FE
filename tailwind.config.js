@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         "TLYellow": "#FEE715",
+        "TLBlack" : "#101820",
       }
     }
   },

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useToken = () => {
+const useToken = (): { token: string | null; setToken: (userToken: string | null) => void } => {
   const getToken = (): string | null => {
     const tokenString = localStorage.getItem('token');
     return tokenString !== null ? JSON.parse(tokenString) : null;
@@ -13,10 +13,7 @@ const useToken = () => {
     setToken(userToken);
   };
 
-  return {
-    setToken: saveToken,
-    token,
-  };
+  return { token, setToken : saveToken };
 };
 
 export default useToken;

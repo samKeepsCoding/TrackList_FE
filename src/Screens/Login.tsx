@@ -1,8 +1,12 @@
 import React from 'react'
 
-const Login = () => {
+interface LoginProps {
+  setToken: (token: string | null) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ setToken }) => {
   return (
-    <div>Login</div>
+    <div className='text-white'>Login</div>
   )
 }
 

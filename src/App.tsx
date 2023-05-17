@@ -1,48 +1,41 @@
-import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Page Imports
+import Home from './Screens/Home';
+import Landing from './Screens/Landing';
+import SignUp from './Screens/SignUp';
+import Login from './Screens/Login';
 
 // Component Imports
 import NavBar from './Components/NavBar';
-import Home from './Screens/Home';
 
+// Hooks
+import useToken from './Hooks/useToken';
 
-interface Loop {
-  id: number;
-  title: string;
-  data: string;
-}
+const App: React.FC = () => {
+  const { token, setToken } = useToken();
 
-function App() {
-  const [loops, setLoops] = useState<Loop[]>([])
-  
-
-  useEffect(() => {
-    const fetchLoops = async () => {
-      try {
-        const res = await axios.get('api/Loop');
-        setLoops(res.data);
-      } catch (err) {
-        console.error("Error fetching loops:", err);
-      }
-    };
-
-    fetchLoops();
-    console.log(loops)
-  },[])
   return (
-    <>
-      <BrowserRouter>
-        <NavBar/>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route
+          path='/home'
+          element={
+            token ? (
+              <Home/>
+            ) : (
+              <Navigate to='/login' replace={true} state={{ from: '/home'}} />
+            )
+          }
+        />
+        
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/register" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
