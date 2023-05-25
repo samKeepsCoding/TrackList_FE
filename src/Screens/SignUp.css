@@ -1,0 +1,18 @@
+.formInput {
+    width: 100%;
+    border-bottom: 0.4px solid var(--TL-yellow);
+    padding: 0.75rem 0.5rem;
+    color: var(--TL-Black);
+    font-weight: 100;
+    border-color: var(--TL-Black);
+}
+
+@media screen and (min-width: 650px) {
+    .formInput {
+      padding: 0.5rem;
+    }
+  }
+
+input:focus {
+    outline: none;
+  }

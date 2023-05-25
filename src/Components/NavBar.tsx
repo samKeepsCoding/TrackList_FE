@@ -1,24 +1,72 @@
-import React from 'react';
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+import useToken from '../Hooks/useToken';
 
 const NavBar = () => {
+
+    const [navVisible, setNavVisible] = useState<Boolean>(true);
+    const [prevScrollPos, setPrevScrollPos] = useState<Number>(0);
+
+
+    
+    const [token, setToken] = useState<String | null>("");
+
+    const variants = {
+        open: { opacity: 1, y: 0 },
+        closed: { opacity: 0, y: "-100%" },
+      }
+
+    
+
+    useEffect(() => {
+        const handleScroll = () => {
+            
+            const currentScrollPos : Number = window.pageYOffset;
+            if (prevScrollPos > currentScrollPos) {
+                setNavVisible(true)
+            } else {
+                setNavVisible(false)
+            }
+            setPrevScrollPos(currentScrollPos)
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+
+    }, [prevScrollPos]);
+
+    useEffect(() => {
+        const handleLogin = () => {
+            if (localStorage.getItem("token")) {
+                setToken(localStorage.getItem("token"))
+            } else {
+                setToken("");
+            }
+        }
+    })
   return (
     <>
-       <header className='flex flex-row items-center justify-center p-4 px-8 w-full'>
+       <motion.header 
+            className='flex flex-row items-center justify-center p-4 px-8 w-full bg-gradient-to-b from-black to-transparent fixed z-30'
+            initial='open'
+            animate={navVisible ? 'open' : 'closed'}
+            variants={variants}
+            transition={{duration: 0.2}} 
+        >
             <nav className='flex flex-row justify-between items-center w-full'>
-                <h1 className='font-bold text-3xl lg:text-4xl'>TrackList<span className='text-TLYellow'>.</span></h1>
-                <div className='ml-auto flex items-center space-x-3 text-md  md:text-xl'>
-                    <a href='/login'>
+                <a 
+                    className='font-bold text-3xl lg:text-4xl'
+                    href='/home'
+                >
+                        TrackList<span className='text-TLYellow'>.</span>
+                </a>
+                <div className="ml-auto flex justify-center items-center ">
+                    <a href="/login">
                         Login
-                    </a>
-                    <span>/</span>
-                    <a href='/register'>
-                        <button className='rounded-full py-[.1rem] px-3 bg-white text-TLBlack hover:bg-transparent hover:text-white md:hover:border-TLyellow border-2'>
-                            Try free
-                        </button>
                     </a>
                 </div>
             </nav>
-        </header> 
+        </motion.header> 
     </>
   )
 }

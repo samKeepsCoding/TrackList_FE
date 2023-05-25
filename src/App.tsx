@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Page Imports
@@ -12,9 +12,13 @@ import NavBar from './Components/NavBar';
 
 // Hooks
 import useToken from './Hooks/useToken';
+import Footer from './Components/Footer';
 
 const App: React.FC = () => {
   const { token, setToken } = useToken();
+  
+
+  
 
   return (
     <BrowserRouter>
@@ -27,7 +31,7 @@ const App: React.FC = () => {
             token ? (
               <Home/>
             ) : (
-              <Navigate to='/login' replace={true} state={{ from: '/home'}} />
+              <Navigate to='/' replace={true} state={{ from: '/home'}} />
             )
           }
         />
@@ -35,6 +39,8 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<SignUp />} />
       </Routes>
+
+      <Footer/>
     </BrowserRouter>
   );
 }

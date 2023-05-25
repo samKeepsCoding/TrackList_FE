@@ -1,0 +1,19 @@
+.home-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    width: 100%;
+    
+    
+   
+}
+
+
+.home-grid-element-sideBar {
+     grid-area: 1 / 1 / 2 / 2;
+}
+
+.home-grid-element-mainContent {
+     grid-area: 1 / 2 / 2 / 4; 
+}
+

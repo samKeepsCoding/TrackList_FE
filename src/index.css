@@ -7,3 +7,8 @@ body {
     background-color: #101820;
     color: #ffffff;
   }
+
+:root {
+  --TL-black: #101820;
+  --TL-yellow: #FEE715;
+}
