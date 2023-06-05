@@ -11,7 +11,7 @@ const HomeSideBar = () => {
   }
   return (
     <>
-        <aside className='w-1/4 h-full hidden md:flex justify-center items-center bg-TLYellow text-TLBlack'>
+        <aside className='w-[260px] h-screen hidden md:flex justify-center  bg-TLYellow text-TLBlack'>
             <button 
               className=""
               onClick={logout}

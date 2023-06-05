@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { CardProps } from '../Types'
 import { PanInfo, motion } from 'framer-motion';
+import AudioPlayer from './AudioPlayer';
+import producing from '../Assets/producing.jpg'
+
 
 const AudioCard: React.FC<CardProps> = ({ card, removeCard, active }) => {
     const [leaveX, setLeaveX] = useState(0);
@@ -21,8 +24,7 @@ const AudioCard: React.FC<CardProps> = ({ card, removeCard, active }) => {
             removeCard(card, "nope");
         }
     };
-    const classNames = `absolute h-[360px] md:h-[400px] w-[260px] max-w-screen md:w-[300px] bg-white shadow-xl rounded-2xl flex flex-col justify-center items-center cursor-grab mb-8`
-
+    const classNames = `absolute h-[360px] md:h-[400px] w-[260px] max-w-screen md:w-[300px] bg-white shadow-xl rounded-2xl flex flex-col justify-center items-center cursor-grab mb-8 text-TLBlack`
 
   return (
     <>
@@ -45,12 +47,19 @@ const AudioCard: React.FC<CardProps> = ({ card, removeCard, active }) => {
                     scale: 0.5,
                     transition: { duration: 0.2 },
                 }}
-                className={classNames}
+                className={`${classNames}`}
                 data-testid="active-card"
             >
                 <h1 className='text-black'>
                     {card.title}
                 </h1>
+                <AudioPlayer 
+                    audioData={card.data}
+                    wavHieght={160}
+                />
+                <p>See more from this 
+                    <a href={`/producer/${card.userId}`}> Producer</a> 
+                </p>
             </motion.div>
         ): (
             <div
@@ -58,6 +67,7 @@ const AudioCard: React.FC<CardProps> = ({ card, removeCard, active }) => {
             card.title.length % 2 === 0 ? "rotate-6" : "-rotate-6"
           }`}
         >
+            
             <title>
                 {card.title}
             </title>

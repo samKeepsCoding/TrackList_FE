@@ -17,7 +17,7 @@ const Landing = () => {
             Create 
           </h1> 
           <a href='/register' className='w-full flex justify-center mt-8'>
-            <button className='rounded-full flex justify-center w-full max-w-sm py-3 text-2xl font-bold md:hover:bg-white text-TLBlack bg-TLYellow hover:white'>Create account</button>
+            <button className='rounded-full flex justify-center w-full max-w-sm py-3 text-2xl font-bold md:hover:bg-white text-TLBlack bg-TLYellow hover:white'>Create Account</button>
           </a>
           <a href='/login' className='w-full flex md:hidden justify-center mt-3'>
             <button className='rounded-full flex justify-center w-full max-w-sm py-3 text-2xl font-bold md:hover:bg-white text-TLBlack bg-TLYellow hover:white'>Login </button>

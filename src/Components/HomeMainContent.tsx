@@ -65,15 +65,16 @@ const HomeMainContent = () => {
 
   return (
     <>
-        <main className='flex justify-center items-center relative w-full md:w-3/4 h-full'>
+        <main className='flex justify-center items-center relative w-full h-full overflow-hidden'>
             {loops.map((loop, index) => {
               return(
-                <AnimatePresence>
+                <AnimatePresence key={index}>
                   <AudioCard 
                     key={loop.title} 
                     active={index === activeIndex} 
                     removeCard={removeCard}
                     card={loop}
+
                   />
                 </AnimatePresence>
               )

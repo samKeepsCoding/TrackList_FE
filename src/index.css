@@ -12,3 +12,13 @@ body {
   --TL-black: #101820;
   --TL-yellow: #FEE715;
 }
+
+.lineYellow {
+  width: 100%;
+  border-top: 0.1px solid var(--TL-yellow);
+}
+.lineWhite {
+  width: 100%;
+  border-top: 0.1px solid #ffffff;
+}
+

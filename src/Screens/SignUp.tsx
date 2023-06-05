@@ -76,21 +76,14 @@ const SignUp: React.FC = () => {
             onSubmit={handleSubmit}
           >
             <h1 className='text-center md:text-start w-full text-3xl md:text-6xl font-bold mb-0 md:mb-8'>Sign Up</h1>
-            {/* <label className='text-xl md:text-2xl'>
-              Username:
-            </label> */}
             <input placeholder='Username' type='text' name='userName' value={formData.userName} onChange={handleChange} className='formInput mb-3'
             />
-            {/* <label className='text-xl md:text-2xl'>
-              Password:
-            </label> */}
             <input placeholder='Password' type='password' name='password' value={formData.password} onChange={handleChange} className='formInput'
             />
             <div className='w-full flex flex-col justify-center items-center mt-32'>
               <button 
-                className='relative rounded-sm flex justify-center w-full py-3 mt-8 text-xl md:text-2xl font-semibold md:hover:bg-white text-white hover:text-TLYellow bg-TLBlack hover:border-2-black'
+                className='relative rounded-sm flex justify-center w-full py-3 mt-8 text-xl md:text-2xl font-semibold text-white hover:text-TLYellow bg-TLBlack hover:border-2-black'
                 type='submit'
-              
               >
                 Continue 
                 <FiChevronRight size={15} className='absolute top-1/2 right-3 transform -translate-x-1/2 -translate-y-1/2' /> 
