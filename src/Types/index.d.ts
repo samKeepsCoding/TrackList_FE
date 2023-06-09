@@ -14,6 +14,13 @@ export type CardType = {
     userId: number;
 }
 
+export type Loop = {
+    id: number;
+    title: string;
+    data: string;
+    userId: number;
+}
+
 export type SwipeType = "like" | "nope" | "superlike";
 
 export type ResultType = { [k in SwipeType] : number};
@@ -24,5 +31,14 @@ export interface CardProps {
     card: CardType;
     active: boolean;
     removeCard: (oldCard: CardType, swipe: SwipeType) => void;
+
+}
+
+export interface PlayerState {
+    isActive: boolean,
+    isPlaying: boolean,
+    currentLoops: Loop[] | [],
+    activeLoop: Loop | null,
+    currentIndex: number
 
 }

@@ -15,7 +15,7 @@ interface ProducerInfo {
 
 const ProducerProfile: React.FC = () => {
 
-    const { id } = useParams<{ id: string }>();
+    const { id: producerId } = useParams<{ id: string }>();
     const [producerInfo, setProducerInfo] = useState<ProducerInfo | null>(null);
 
     useEffect(() => {
@@ -28,12 +28,12 @@ const ProducerProfile: React.FC = () => {
             }
         };
         
-        if (id) {
+        if (producerId) {
 
-            fetchProducerProfile(id);
+            fetchProducerProfile(producerId);
         }
 
-    }, [id]);
+    }, [producerId]);
 
 
 
@@ -79,7 +79,7 @@ const ProducerProfile: React.FC = () => {
 
                 <div className="lineYellow"></div>
 
-                <ProducerPlaylist id={id ?? ""}/>
+                <ProducerPlaylist producerId={producerId ?? ""}/>
             </main>
         ) : (
             <p>Loading ...</p>

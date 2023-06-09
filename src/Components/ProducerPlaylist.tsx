@@ -1,55 +1,57 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector} from 'react-redux'
 import { useParams } from 'react-router-dom';
-import PlaylistRow from './PlaylistRow';
 import AudioPlayer from './AudioPlayer';
+
 import { IoPlay, IoPause } from "react-icons/io5";
 import CurrentTrack from './CurrentTrack';
 import useAudioPlayer from '../Hooks/useAudioPlayer';
+import ProducerPlaylistRow from './ProducerPlaylistRow';
+
+import { playPause, setActiveLoop, setCurrentLoops } from '../redux/Features/Player/playerSlice';
+import { PlayerState } from '../Types';
+import { useGetProducerLoopsQuery } from '../redux/Services/tracklistCore';
+import { RootState } from '../redux/store';
 
 interface PlaylistProps {
-  id: string;
+  producerId: string;
 };
 
 interface Loop {
     title: string;
-    data: string
+    data: string;
+    userId: number;
+    id: number;
 }
 
+const ProducerPlaylist: React.FC<PlaylistProps> = ({ producerId }) => {
+
+    // const [producerLoops, setProducerLoops] = useState<Loop[]>([]);
+
+    // const { id: producerId } = useParams<{ id: string }>();
+
+    const { isPlaying, currentLoops} = useSelector((state: RootState) => state.player)
+    const dispatch = useDispatch();
+
+    const { data: producerLoops, isLoading, isError } = useGetProducerLoopsQuery(producerId);
+
+    useEffect(() => {
+        if (producerLoops) {
+            dispatch(setCurrentLoops(producerLoops))
+
+        }
+    },[producerLoops, dispatch])
 
 
-const ProducerPlaylist: React.FC<PlaylistProps> = ({ id }) => {
-
-  const [producerLoops, setProducerLoops] = useState<Loop[]>([]);
-  const [currentTrack, setCurrentTrack] = useState<Loop>()
-
-  const audioElementRef = useRef<HTMLAudioElement | null>(null);
-
-  const { id: producerId } = useParams<{ id: string }>();
-
-  useEffect(() => {
-    const fetchProducerLoops = async (userId: string) => {
-      try {
-        const res = await axios.get(`/api/Loop/userLoops/${userId}`);
-        console.log(res.data)
-        setProducerLoops(res.data);
-        console.log("fetcheeeed");
-      } catch (err) {
-        console.error("Error fetching loops:", err);
-      }
-    };
-
-    if (producerId) {
-      fetchProducerLoops(producerId);
+    if (isLoading) {
+        return <p>Loading</p>
     }
 
-  }, [producerId]);
-
-  const handlePlay = (track: Loop) => {
-    setCurrentTrack(track);
-  };
-
-
+    if (isError) {
+        return <p>Error occured while fetching producer loops</p>
+    }
+   
   return (
     <> 
         <table className='table-auto w-full text-center font-thin border-separate border-spacing-2'>
@@ -62,25 +64,18 @@ const ProducerPlaylist: React.FC<PlaylistProps> = ({ id }) => {
             </tr>
             </thead>
             <tbody className='space-y-6'>
-                {producerLoops ? producerLoops.map((loop, index) => (
-                    <tr key={index}>
-                        <td className='text-start flex items-center '>
-                            <IoPlay 
-                                size={15} 
-                                className='mr-2'
-                                onClick={() => handlePlay(loop)}
-                            />
-                            {loop.title}
-                        </td>
-                        <td className=''>F# min</td>
-                        <td>134</td>
-                    </tr>
-                )) : (<p>Loading...</p>)}
+                {producerLoops ? producerLoops.map((loop, index: number) => (
+                    <>
+                    
+                        <ProducerPlaylistRow key={loop.id} loop={loop} isPlaying={isPlaying} index={index}/>
+                    
+                    </>
+            )) : (<p>Loading...</p>)}
             </tbody>
         </table>
-        {currentTrack ? (
+        {/* {currentTrack ? (
             <CurrentTrack track={currentTrack}/>
-        ): null}
+        ): null} */}
     </>
   );
 };
