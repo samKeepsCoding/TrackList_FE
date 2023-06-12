@@ -9,7 +9,7 @@ const initialState: PlayerState = {
     currentLoops: [],
     activeLoop: null,
     isActive: false,
-    currentIndex: 0
+    currentIndex: 0,
 }
 
 const playerSlice = createSlice({
@@ -52,6 +52,7 @@ const playerSlice = createSlice({
                 state.currentIndex = action.payload - 1
             }
         },
+        
 
     }
 })

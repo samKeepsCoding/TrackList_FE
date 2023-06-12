@@ -2,11 +2,13 @@
 import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 
+
 const HomeSideBar = () => {
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.clear();
+    
     navigate('/');
   }
   return (

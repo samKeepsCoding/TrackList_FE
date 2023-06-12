@@ -40,5 +40,4 @@ export interface PlayerState {
     currentLoops: Loop[] | [],
     activeLoop: Loop | null,
     currentIndex: number
-
 }

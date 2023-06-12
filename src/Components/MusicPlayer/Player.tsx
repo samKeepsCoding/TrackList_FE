@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, ReactEventHandler} from 'react'
+import React, {useRef, useEffect, ReactEventHandler, useState} from 'react'
 import { Loop } from '../../Types';
 import { useDispatch } from 'react-redux';
 import { playPause } from '../../redux/Features/Player/playerSlice';
@@ -6,17 +6,22 @@ import { playPause } from '../../redux/Features/Player/playerSlice';
 interface PlayerProps {
     isPlaying: boolean,
     volume: number,
-    seekTime: number,
     activeLoop: Loop | null,
     repeat: boolean,
     // onEnded: React.ReactEventHandler<HTMLAudioElement>,
-    currentIndex: number
+    currentIndex: number,
+    value: number
 }
 
-const Player: React.FC<PlayerProps> = ({isPlaying, volume, seekTime, activeLoop, repeat, currentIndex}) => {
+const Player: React.FC<PlayerProps> = ({
+    isPlaying, 
+    volume,  
+    activeLoop, 
+    repeat, 
+    value
+}) => {
 
     const ref = useRef<HTMLAudioElement>(null);
-        
 
     useEffect(() => {
 
@@ -25,11 +30,12 @@ const Player: React.FC<PlayerProps> = ({isPlaying, volume, seekTime, activeLoop,
         }
     },[volume])
 
-    useEffect(() => {
-        if (ref.current) {
-            ref.current.currentTime = seekTime;
-        }
-    },[seekTime]);
+    // useEffect(() => {
+    //     if (ref.current) {
+    //         ref.current.currentTime = seekTime;
+    //     }
+    // },[seekTime]);
+
 
     useEffect(() => {
         if(ref.current && isPlaying) {
@@ -38,7 +44,6 @@ const Player: React.FC<PlayerProps> = ({isPlaying, volume, seekTime, activeLoop,
             ref.current?.pause();
         }
     }, [isPlaying, activeLoop])
-
 
 
 

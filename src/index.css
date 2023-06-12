@@ -22,3 +22,7 @@ body {
   border-top: 0.1px solid #ffffff;
 }
 
+* {
+  box-sizing: border-box;
+}
+
