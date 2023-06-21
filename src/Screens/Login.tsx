@@ -2,43 +2,28 @@ import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css'
 import { FiChevronRight } from 'react-icons/fi'
-
-
 import background from '../Assets/producing.jpg';
-
-interface LoginProps {
-  setToken: (token: string | null) => void;
-}
-
-interface Credentials {
-  username: string;
-  password: string;
-}
-
-const loginUser = async (credentials: Credentials) => {
-  return fetch('/api/Auth/login', {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(credentials),
-  });
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import loginUser from '../api/login'
+import { loginRequest, loginSuccess } from '../redux/Features/Auth/authSlice';
 
 
 
 
 
-const Login: React.FC<LoginProps> = ({ setToken }) => {
+const Login: React.FC = () => {
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(loginRequest());
 
     try{
       const response = await loginUser({
@@ -46,14 +31,12 @@ const Login: React.FC<LoginProps> = ({ setToken }) => {
         password,
       });
 
-      console.log(response.status);
-
       if (response.status === 200) {
         const dataString = await response.text();
-        // setToken(data.token);
 
         const data = JSON.parse(dataString);
-        setToken(data.token);
+        dispatch(loginSuccess({token: data.token, userId: data.id}))
+
         navigate('/home')
 
       } else {

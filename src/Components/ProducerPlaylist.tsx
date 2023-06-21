@@ -31,7 +31,7 @@ const ProducerPlaylist: React.FC<PlaylistProps> = ({ producerId }) => {
 
     // const { id: producerId } = useParams<{ id: string }>();
 
-    const { isPlaying, currentLoops} = useSelector((state: RootState) => state.player)
+    const { isPlaying} = useSelector((state: RootState) => state.player)
     const dispatch = useDispatch();
 
     const { data: producerLoops, isLoading, isError } = useGetProducerLoopsQuery(producerId);

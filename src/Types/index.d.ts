@@ -41,3 +41,16 @@ export interface PlayerState {
     activeLoop: Loop | null,
     currentIndex: number
 }
+
+export interface ProfileState {
+    userName: string,
+    likedLoops: Loop[] | [];
+    profilePicData: string | null,
+}
+
+export interface AuthSlice {
+    isLoading: boolean;
+    error: null | string;
+    token: null | string;
+    userId: null | number;
+}

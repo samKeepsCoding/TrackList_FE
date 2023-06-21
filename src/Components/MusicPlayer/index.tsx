@@ -90,7 +90,7 @@ const MusicPlayer = () => {
 
 
   return (
-    <div className='relative w-full flex items-center justify-center sm:px-12 px-8'>
+    <div className='relative w-full flex items-center justify-center sm:px-12 px-4 text-sm'>
         <Track isPlaying={isPlaying} activeLoop={activeLoop} isActive={isActive} currentLoops={currentLoops} currentIndex={currentIndex}/>
         <div className='flex-1 flex flex-col items-center justify-center'>
             <Controls 
@@ -100,33 +100,33 @@ const MusicPlayer = () => {
                   handlePlayPause={handlePlayPause}
                   currentLoops={currentLoops}            
             />
-            {/* Current Time */}
-            <div>
-                {calculateTime(currentTime)}
-            </div>
-            {/* Progress Bar */}
-            <div>
-                <input 
-                    type='range' 
-                    className='progressBar' 
-                    defaultValue='0'
-                    ref={progressBarRef}
+            <div className='flex justify-center items-center space-x-4'>
+                {/* Current Time */}
+                <div>
+                    {calculateTime(currentTime)}
+                </div>
+                {/* Progress Bar */}
+
+                    <input 
+                        type='range' 
+                        className='progressBar' 
+                        defaultValue='0'
+                        ref={progressBarRef}
+                        onChange={changeRange}
+
+                    />
+
+                {/* Audio */}
+                <audio
+                    ref={audioRef}
+                    src={`data:audio/mp3;base64,${activeLoop?.data}`}
+                    preload="metadata"
                     onChange={changeRange}
-
                 />
+
+                {/* Duration */}
+                <div >{(duration && !isNaN(duration)) && calculateTime(duration)}</div>
             </div>
-            {/* Audio */}
-            <audio
-                ref={audioRef}
-                src={`data:audio/mp3;base64,${activeLoop?.data}`}
-                preload="metadata"
-                onChange={changeRange}
-            />
-
-            {/* Duration */}
-            <div >{(duration && !isNaN(duration)) && calculateTime(duration)}</div>
-
-
         </div>
     </div>
   )

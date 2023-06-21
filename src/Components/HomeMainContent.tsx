@@ -32,14 +32,6 @@ const HomeMainContent = () => {
     console.log(loops)
   },[])
 
-  // const removeCard = (oldCard: CardType, swipe: SwipeType) => {
-
-  //   setHistory((current) => [...current, {...oldCard, swipe}]);
-
-  //   setLoops((current) => current.filter((loop) => {
-  //     return loop.id !== oldCard.id;
-  //   }))
-  // };
 
   const removeCard = (oldCard: CardType, swipe: SwipeType) => {
     setHistory((current) => [...current, { ...oldCard, swipe }]);
@@ -65,7 +57,7 @@ const HomeMainContent = () => {
 
   return (
     <>
-        <main className='flex justify-center items-center relative w-full h-full overflow-hidden'>
+        <main className='flex justify-center items-center relative w-full h-screen overflow-hidden'>
             {loops.map((loop, index) => {
               return(
                 <AnimatePresence key={index}>

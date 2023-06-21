@@ -17,11 +17,19 @@ const playerSlice = createSlice({
     initialState,
     reducers: {
         setActiveLoop: (state, action: PayloadAction<{loop: Loop; index : number}>) => {
-
                 state.activeLoop = action.payload.loop;
                 state.isActive = true;
 
                 state.currentIndex = action.payload.index;
+        },
+
+        makeInactive: (state) => {
+            state.isPlaying = false;
+            state.currentLoops = [];
+            state.activeLoop = null;
+            state.isActive = false;
+            state.currentIndex = 0;
+            console.log(state.activeLoop)
         },
 
         playPause: (state, action: PayloadAction<boolean>) => {
@@ -57,5 +65,5 @@ const playerSlice = createSlice({
     }
 })
 
-export const {setActiveLoop, playPause, setCurrentLoops, nextLoop, prevLoop} = playerSlice.actions;
+export const {setActiveLoop, playPause, setCurrentLoops, nextLoop, prevLoop, makeInactive} = playerSlice.actions;
 export default playerSlice.reducer;

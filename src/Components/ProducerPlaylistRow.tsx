@@ -17,15 +17,7 @@ interface PlaylistRowProps {
 
 
 const ProducerPlaylistRow: React.FC<PlaylistRowProps> = ({loop, isPlaying, key, index}) => {
-    const dispatch = useDispatch();
     const activeLoop  = useSelector((state: RootState) => state.player.activeLoop)
-
-    
-
-    //   useEffect(() => {
-    //     console.log(activeLoop);
-    //   }, [activeLoop])
-
       
 
   return (

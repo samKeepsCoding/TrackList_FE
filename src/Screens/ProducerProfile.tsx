@@ -40,10 +40,10 @@ const ProducerProfile: React.FC = () => {
     
   return (
     <>
-        <div className="w-full min-h-screen flex justify-start overflow-y-scroll">
+        <div className="w-full min-h-screen flex justify-start">
             <HomeSideBar/>
         {producerInfo ? (
-            <main className=" w-full flex flex-col items-start justify-start py-8 px-3 md:px-8 space-y-10 mt-[3rem] min-h-screen">
+            <main className=" w-full flex flex-col items-start justify-start py-8 px-3 md:px-8 space-y-10  max-h-screen overflow-y-scroll">
                 <section className="w-full flex items-start justify-start space-x-4">
                     {producerInfo.profilePicData ? (
                     <img

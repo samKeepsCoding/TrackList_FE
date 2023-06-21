@@ -1,16 +1,20 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useToken from '../Hooks/useToken';
 import Login from './Login';
 import Landing from './Landing';
 import HomeMainContent from '../Components/HomeMainContent';
 import HomeSideBar from '../Components/HomeSideBar';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 
 const Home: React.FC = () => {
   const {token, setToken} = useToken();
 
   const navigate = useNavigate();
+
+
 
   const logout = () => {
     localStorage.clear();

@@ -19,13 +19,14 @@ import Footer from './Components/Footer';
 import { PlayerState } from './Types';
 import MusicPlayer from './Components/MusicPlayer';
 import { RootState } from './redux/store';
+import UserLikes from './Components/UserLikes';
 
 
 const App: React.FC = () => {
-  const { token, setToken } = useToken();
   const { activeLoop, isActive } = useSelector((state: RootState) => state.player)
 
-  
+
+  const {token} = useSelector((state: RootState) => state.auth)
 
   return (
     <BrowserRouter>
@@ -43,10 +44,11 @@ const App: React.FC = () => {
           }
         />
         
-        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
         <Route path='/audioPlayer' element={<AudioPlayerPage/>} />
         <Route path='/producer/:id' element={<ProducerProfile/>}/>
+        <Route path='/user/likes/:id' element={<UserLikes/>} />
       </Routes>
       
       {isActive && (

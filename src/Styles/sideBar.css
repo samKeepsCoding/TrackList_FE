@@ -1,0 +1,14 @@
+.sideBar-links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 12px;
+    border-bottom: 0.8px solid;
+    cursor: pointer;
+}
+
+.sideBar-links:hover {
+    color: var(--TL-yellow);
+    background-color: var(--TL-black);
+}
