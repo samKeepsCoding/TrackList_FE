@@ -34,10 +34,6 @@ const NavBar = () => {
 
     }, [prevScrollPos]);
 
-    useEffect(() => {
-        console.log(token)
-    },[token])
-
   return (
     <>
        <motion.header 

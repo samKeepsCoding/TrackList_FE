@@ -14,17 +14,16 @@ const UserLikes= () => {
     
   return (
     <>
-        <div className='w-full min-h-screen flex justify-center'>
+        <div className='w-full min-h-screen flex justify-start'>
             <HomeSideBar/>
-            {profile ? (
-
+            {profile && !isLoading ? (
                     <main className='w-full flex flex-col items-start justify-start py-8 px-3 md:px-8 space'>
                         <h1 className='mb-4 text-4xl'>Likes</h1>
                         <div className="lineYellow"></div>
                         <MusicPlaylist loops={profile.likedLoops}/>
                     </main>
             ): <p>Loading...</p>}
-        </div>
+            </div>
     </>
   )
 }

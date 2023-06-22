@@ -41,7 +41,6 @@ const Login: React.FC = () => {
 
       } else {
         const data = await response.text();
-        console.log(data);
         setErrMsg(data);
       }
     } catch (error) {

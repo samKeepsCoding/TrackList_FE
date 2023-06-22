@@ -1,23 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardProps } from '../Types'
 import { PanInfo, motion } from 'framer-motion';
 import AudioPlayer from './AudioPlayer';
-import producing from '../Assets/producing.jpg'
+import { postLike } from '../api/likes';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 
 const AudioCard: React.FC<CardProps> = ({ card, removeCard, active }) => {
     const [leaveX, setLeaveX] = useState(0);
     const [leaveY, setLeaveY] = useState(0);
 
-    const onDragEnd = (_e: any, info: PanInfo) => {
+    const userId = (localStorage.getItem("id"))
+
+    const onDragEnd = async (_e: any, info: PanInfo) => {
         if (info.offset.y < -100) {
             setLeaveY(-2000);
+            
             removeCard(card, "superlike");
             return;
         }
         if (info.offset.x > 100) {
             setLeaveX(1000);
             removeCard(card, "like");
+            console.log(userId)
+            if (userId != null) {
+                const response = await postLike({
+                    userId: parseInt(userId),
+                    loopId: card.id
+                })
+                console.log(response)
+            }
+            
         }
         if (info.offset.x < -100) {
             setLeaveX(-1000);

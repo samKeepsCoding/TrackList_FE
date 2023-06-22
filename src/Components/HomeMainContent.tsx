@@ -17,6 +17,7 @@ const HomeMainContent = () => {
   });
   const [history, setHistory] = useState<HistoryType[]>([])
 
+
   const activeIndex = loops.length - 1;
 
   useEffect(() => {
